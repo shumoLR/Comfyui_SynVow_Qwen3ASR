@@ -1,0 +1,459 @@
+{
+  "id": "bb3232e9-3c28-4b8d-92ef-4c5a0be558b5",
+  "revision": 0,
+  "last_node_id": 17,
+  "last_link_id": 17,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "Qwen3ForcedAlignerLoader",
+      "pos": [
+        982.8587440820107,
+        547.3741674187754
+      ],
+      "size": [
+        337.7712233687165,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model_name",
+          "name": "model_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "aligner",
+          "name": "aligner",
+          "type": "QWEN3_ALIGNER",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Qwen3ForcedAlignerLoader"
+      },
+      "widgets_values": [
+        "Qwen3-ForcedAligner-0.6B"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1372.4826731463277,
+        467.1416986401216
+      ],
+      "size": [
+        279.96389719290244,
+        333.4961848189961
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "label": "字符串",
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "f2838ed5e59de4d73cde5c98354b87a8d3200190",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "你\t0.400\t0.800\n准\t0.800\t1.120\n备\t1.120\t1.360\n好\t1.360\t1.600\n了\t1.600\t1.680\n吗\t1.760\t2.960\nOK\t2.960\t4.000\n双\t7.280\t7.520\n手\t7.520\t7.760\n摇\t7.840\t8.080\n踏\t8.160\t8.320\n踏\t8.400\t8.560\n步\t8.560\t8.640\n感\t8.960\t9.120\n受\t9.200\t9.280\n我\t9.280\t9.600\n的\t9.600\t9.760\n新\t9.760\t9.920\n舞\t10.000\t10.160\n步\t10.240\t10.320\nHey\t13.520\t13.920"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "Qwen3ForcedAlign",
+      "pos": [
+        1063.5598839752752,
+        663.4581916642434
+      ],
+      "size": [
+        210,
+        132
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "aligner",
+          "name": "aligner",
+          "type": "QWEN3_ALIGNER",
+          "link": 14
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 16
+        },
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 15
+        },
+        {
+          "label": "language",
+          "name": "language",
+          "type": "COMBO",
+          "widget": {
+            "name": "language"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "timestamps",
+          "name": "timestamps",
+          "type": "STRING",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Qwen3ForcedAlign"
+      },
+      "widgets_values": [
+        "",
+        "Chinese"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "Qwen3ASRLoader",
+      "pos": [
+        -146.8113836108074,
+        502.1290966585815
+      ],
+      "size": [
+        336.5584374772744,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model_name",
+          "name": "model_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "QWEN3ASR_MODEL",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Qwen3ASRLoader"
+      },
+      "widgets_values": [
+        "Qwen3-ASR-1.7B"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "LoadAudio",
+      "pos": [
+        -113.86630147106465,
+        632.0521295307819
+      ],
+      "size": [
+        270,
+        136
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "音频",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            11,
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "下载1334.mp4",
+        null,
+        null
+      ]
+    },
+    {
+      "id": 11,
+      "type": "Qwen3ASRTranscribe",
+      "pos": [
+        217.08480678078303,
+        531.5503146527471
+      ],
+      "size": [
+        233.4072226049849,
+        78
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "QWEN3ASR_MODEL",
+          "link": 10
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 11
+        },
+        {
+          "label": "language",
+          "name": "language",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "language"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            12,
+            15
+          ]
+        },
+        {
+          "label": "language",
+          "name": "language",
+          "type": "STRING",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Qwen3ASRTranscribe"
+      },
+      "widgets_values": [
+        "Auto"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "ShowText|pysssss",
+      "pos": [
+        527.4225465988368,
+        636.9297850952662
+      ],
+      "size": [
+        210.87765522845916,
+        88
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "label": "字符串",
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "f2838ed5e59de4d73cde5c98354b87a8d3200190",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "ShowText|pysssss",
+      "pos": [
+        509.0438976260811,
+        333.51331096980994
+      ],
+      "size": [
+        445.4691105768577,
+        233.08165760198466
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "label": "字符串",
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "f2838ed5e59de4d73cde5c98354b87a8d3200190",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "你准备好了吗？ OK，双手摇，踏踏步，感受我的新舞步。 Hey。"
+      ]
+    }
+  ],
+  "links": [
+    [
+      10,
+      10,
+      0,
+      11,
+      0,
+      "QWEN3ASR_MODEL"
+    ],
+    [
+      11,
+      12,
+      0,
+      11,
+      1,
+      "AUDIO"
+    ],
+    [
+      12,
+      11,
+      0,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      13,
+      11,
+      1,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      14,
+      16,
+      0,
+      15,
+      0,
+      "QWEN3_ALIGNER"
+    ],
+    [
+      15,
+      11,
+      0,
+      15,
+      2,
+      "STRING"
+    ],
+    [
+      16,
+      12,
+      0,
+      15,
+      1,
+      "AUDIO"
+    ],
+    [
+      17,
+      15,
+      0,
+      17,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.2839025177495025,
+      "offset": [
+        275.42240343872095,
+        -113.03761836475097
+      ]
+    },
+    "workflowRendererVersion": "LG",
+    "ue_links": [],
+    "frontendVersion": "1.37.11",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
