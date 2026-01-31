@@ -1,4 +1,5 @@
 # ComfyUI SynVow Qwen3-ASR
+<img width="2386" height="771" alt="image" src="https://github.com/user-attachments/assets/6f4bef09-b632-46bd-ae71-eb557605d759" />
 
 A ComfyUI speech recognition plugin based on [Qwen3-ASR](https://github.com/QwenLM/Qwen3-ASR).
 
@@ -130,3 +131,4 @@ This project follows the license of the original Qwen3-ASR project.
 
 - [Qwen3-ASR Original Project](https://github.com/QwenLM/Qwen3-ASR)
 - [Qwen3-ASR Models on HuggingFace](https://huggingface.co/Qwen)
+
