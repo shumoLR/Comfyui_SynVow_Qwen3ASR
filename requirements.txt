@@ -1,0 +1,3 @@
+qwen-asr
+huggingface_hub
+torchaudio
