@@ -1,6 +1,5 @@
+<img width="1957" height="648" alt="image" src="https://github.com/user-attachments/assets/b0dfdf1c-1bf2-4f97-a16b-a9615c9f4a4f" />
 # ComfyUI SynVow Qwen3-ASR
-<img width="2386" height="771" alt="image" src="https://github.com/user-attachments/assets/6f4bef09-b632-46bd-ae71-eb557605d759" />
-
 A ComfyUI speech recognition plugin based on [Qwen3-ASR](https://github.com/QwenLM/Qwen3-ASR).
 
 ## Original Project
@@ -141,5 +140,6 @@ This project follows the license of the original Qwen3-ASR project.
 ### 2026-02-06
 - **Qwen3 Forced Align**: Added `segment_by_sentence` parameter (boolean, default: true) to split alignment output by sentence/phrase based on punctuation in input text
 - **Qwen3 Forced Align**: Added 3 new outputs: `text_list`, `start_times`, `end_times` for easier downstream processing
+
 
 
