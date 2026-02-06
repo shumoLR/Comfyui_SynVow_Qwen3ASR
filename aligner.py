@@ -1,4 +1,5 @@
 import os
+import re
 import torch
 import folder_paths
 from huggingface_hub import snapshot_download
@@ -78,15 +79,16 @@ class Qwen3ForcedAlign:
                 "audio": ("AUDIO",),
                 "text": ("STRING", {"multiline": True}),
                 "language": (SUPPORTED_LANGUAGES, {"default": "Chinese"}),
+                "segment_by_sentence": ("BOOLEAN", {"default": True}),
             },
         }
     
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("timestamps",)
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING",)
+    RETURN_NAMES = ("timestamps", "text_list", "start_times", "end_times",)
     FUNCTION = "align"
     CATEGORY = "Qwen3-ASR"
 
-    def align(self, aligner, audio, text, language):
+    def align(self, aligner, audio, text, language, segment_by_sentence=True):
         import numpy as np
         
         waveform = audio["waveform"]
@@ -108,16 +110,38 @@ class Qwen3ForcedAlign:
             language=language,
         )
         
-        # 格式化时间戳输出
-        output_lines = []
-        for item in results[0]:
-            output_lines.append(f"{item.text}\t{item.start_time:.3f}\t{item.end_time:.3f}")
+        items = results[0]
         
-        timestamps_str = "\n".join(output_lines)
+        texts, starts, ends = [], [], []
         
-        print(f"[Qwen3-ASR] Alignment completed, {len(results[0])} timestamps")
+        if segment_by_sentence:
+            segments = [s for s in re.split(r'[。？！，、；.?!,;：:\s]+', text) if s]
+            item_idx = 0
+            for seg in segments:
+                seg_start = None
+                seg_end = None
+                matched = ""
+                while item_idx < len(items) and len(matched) < len(seg):
+                    if seg_start is None:
+                        seg_start = items[item_idx].start_time
+                    seg_end = items[item_idx].end_time
+                    matched += items[item_idx].text
+                    item_idx += 1
+                if seg_start is not None:
+                    texts.append(seg)
+                    starts.append(f"{seg_start:.3f}")
+                    ends.append(f"{seg_end:.3f}")
+        else:
+            for item in items:
+                texts.append(item.text)
+                starts.append(f"{item.start_time:.3f}")
+                ends.append(f"{item.end_time:.3f}")
         
-        return (timestamps_str,)
+        timestamps_str = "\n".join(f"{t}\t{s}\t{e}" for t, s, e in zip(texts, starts, ends))
+        
+        print(f"[Qwen3-ASR] Alignment completed, {len(texts)} segments")
+        
+        return (timestamps_str, "\n".join(texts), "\n".join(starts), "\n".join(ends),)
 
 
 NODE_CLASS_MAPPINGS = {
