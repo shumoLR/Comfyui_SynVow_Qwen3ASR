@@ -1,3 +1,4 @@
+<img width="1957" height="648" alt="image" src="https://github.com/user-attachments/assets/7509dd84-3142-4eb4-af8b-171d0b25ea27" />
 # ComfyUI SynVow Qwen3-ASR
 
 基于 [Qwen3-ASR](https://github.com/QwenLM/Qwen3-ASR) 的 ComfyUI 语音识别插件。
@@ -86,9 +87,13 @@ ComfyUI/models/Qwen3-ASR/
 - `audio`：音频输入（ComfyUI AUDIO 类型）
 - `text`：要对齐的文本
 - `language`：语言（支持11种语言）
+- `segment_by_sentence`：按句分段（默认：开启）。开启时根据输入文本中的标点符号分段输出；关闭时按逐字/词输出。
 
 **输出：**
 - `timestamps`：时间戳，格式为 `文字\t开始时间\t结束时间`
+- `text_list`：文本列表，每段一行
+- `start_times`：开始时间列表，每段一行
+- `end_times`：结束时间列表，每段一行
 
 ## 使用示例
 
@@ -130,3 +135,9 @@ ComfyUI/models/Qwen3-ASR/
 
 - [Qwen3-ASR 原项目](https://github.com/QwenLM/Qwen3-ASR)
 - [Qwen3-ASR HuggingFace 模型](https://huggingface.co/Qwen)
+
+## 更新日志
+
+### 2026-02-06
+- **Qwen3 Forced Align**：新增 `segment_by_sentence` 参数（布尔类型，默认开启），根据输入文本中的标点符号按句/短语分段输出对齐结果
+- **Qwen3 Forced Align**：新增 3 个输出：`text_list`、`start_times`、`end_times`，方便下游节点处理
