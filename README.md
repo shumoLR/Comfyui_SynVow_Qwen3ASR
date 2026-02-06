@@ -1,3 +1,4 @@
+<img width="1971" height="652" alt="image" src="https://github.com/user-attachments/assets/6fb8595c-c885-4b4d-a1cb-d46de5c864b9" />
 # ComfyUI SynVow Qwen3-ASR
 <img width="2386" height="771" alt="image" src="https://github.com/user-attachments/assets/6f4bef09-b632-46bd-ae71-eb557605d759" />
 
@@ -87,9 +88,13 @@ Generate word/character-level timestamps.
 - `audio`: Audio input (ComfyUI AUDIO type)
 - `text`: Text to align
 - `language`: Language (supports 11 languages)
+- `segment_by_sentence`: Segment by sentence (default: true). When enabled, splits output by punctuation; when disabled, outputs per character/word.
 
 **Output:**
 - `timestamps`: Timestamps in format `text\tstart_time\tend_time`
+- `text_list`: Text segments, one per line
+- `start_times`: Start times, one per line
+- `end_times`: End times, one per line
 
 ## Usage Example
 
@@ -131,4 +136,10 @@ This project follows the license of the original Qwen3-ASR project.
 
 - [Qwen3-ASR Original Project](https://github.com/QwenLM/Qwen3-ASR)
 - [Qwen3-ASR Models on HuggingFace](https://huggingface.co/Qwen)
+
+## Changelog
+
+### 2026-02-06
+- **Qwen3 Forced Align**: Added `segment_by_sentence` parameter (boolean, default: true) to split alignment output by sentence/phrase based on punctuation in input text
+- **Qwen3 Forced Align**: Added 3 new outputs: `text_list`, `start_times`, `end_times` for easier downstream processing
 
